@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Simon</string>
+    <string name="start_game">Start Game!</string>
+    <string name="high_scores">High Scores</string>
+    <string name="score">Score:</string>
+    <string name="placeholder2">This will be the high scores screen</string>
+    <string name="red">Red</string>
+    <string name="yellow">Yellow</string>
+    <string name="blue">Blue</string>
+    <string name="green">Green</string>
+</resources>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:columnCount="2"
+    tools:context="com.hfad.simon.GameScreen">
+
+    <TextView
+        android:id="@+id/score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_column="0"
+        android:layout_row="0"
+        android:layout_columnSpan="2"
+        android:layout_gravity="center_horizontal"
+        android:textSize="25sp"
+        android:textColor="@color/white"
+        android:text="@string/score" />
+
+    <Button
+        android:id="@+id/red"
+        android:contentDescription="@string/red"
+        android:layout_column="0"
+        android:layout_row="1"
+        android:layout_columnSpan="1"
+        android:layout_gravity="fill"
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:background="@drawable/red"
+        android:onClick="onClickGetButton" />
+
+    <Button
+        android:id="@+id/green"
+        android:contentDescription="@string/green"
+        android:layout_column="1"
+        android:layout_row="1"
+        android:layout_columnSpan="1"
+        android:layout_gravity="fill"
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:background="@drawable/green"
+        android:onClick="onClickGetButton" />
+
+    <Button
+        android:id="@+id/blue"
+        android:contentDescription="@string/blue"
+        android:layout_column="0"
+        android:layout_row="2"
+        android:layout_columnSpan="1"
+        android:layout_gravity="fill"
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:background="@drawable/blue"
+        android:onClick="onClickGetButton" />
+
+    <Button
+        android:id="@+id/yellow"
+        android:contentDescription="@string/yellow"
+        android:shadowColor="@android:color/black"
+        android:layout_column="1"
+        android:layout_row="2"
+        android:layout_columnSpan="1"
+        android:layout_gravity="fill"
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:background="@drawable/yellow"
+        android:onClick="onClickGetButton" />
+
+</GridLayout>
