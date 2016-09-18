@@ -18,6 +18,8 @@ public class GameScreen extends Activity {
   Button previousButton = null;
   Random random = new Random();
   TextView scoreText;
+  View root;
+  static boolean disableButtons = true;
   //boolean showingColorPattern = false;
 
 
@@ -32,7 +34,7 @@ public class GameScreen extends Activity {
 
     // Set the initial score text and set the background to black
     scoreText = (TextView) findViewById(R.id.score);
-    View root = scoreText.getRootView();
+    root = scoreText.getRootView();
     root.setBackgroundColor(getResources().getColor(android.R.color.black));
     scoreText.setText(getString(R.string.score) + (pattern.size()-1));
   }
@@ -40,16 +42,23 @@ public class GameScreen extends Activity {
 
   public void onClickGetButton(View view) {
 
-    if (patternIterator == null) {
-      patternIterator = pattern.iterator();
-    }
+    Button button = (Button) view;
+    Handler handler = new Handler();
+
+    if (!disableButtons) {
+
+      if (patternIterator == null) {
+        patternIterator = pattern.iterator();
+      }
 
       // Play corresponding sound when correct button in pattern is pressed
       if (patternIterator.next() == view.getId()) {
-        MakeSound.buttonSound(view.getId());
+        handler.post(new Blink(button, getPushedButtonColor(button), getButtonColor(button)));
 
-      // If the incorrect button is pressed, play fail sound, clear pattern, and restart the game.
+        // If the incorrect button is pressed, play fail sound, clear pattern, and restart the game.
       } else {
+        disableButtons = true;
+        root.setBackgroundColor(getResources().getColor(android.R.color.holo_red_dark));
         MakeSound.buttonSound(-1);
         pattern.clear();
         pattern.add(getRanodmColor());
@@ -57,19 +66,24 @@ public class GameScreen extends Activity {
         showColorPatternDelayed(1500);
       }
 
-    // If the correct pattern has been entered, add a button to the pattern, restart the iterator, and show the pattern.
-    if (!patternIterator.hasNext()) {
-      pattern.add(getRanodmColor());
-      patternIterator = pattern.iterator();
-      scoreText.setText(getString(R.string.score) + (pattern.size()-1));
-      showColorPatternDelayed(1000);
+      // If the correct pattern has been entered, add a button to the pattern, restart the iterator, and show the pattern.
+      if (!patternIterator.hasNext()) {
+        pattern.add(getRanodmColor());
+        patternIterator = pattern.iterator();
+        scoreText.setText(getString(R.string.score) + (pattern.size() - 1));
+        showColorPatternDelayed(1000);
 
+      }
     }
   }
 
   public void showColorPattern() {
-    scoreText.setText(getString(R.string.score) + (pattern.size()-1));
     final Handler handler = new Handler();
+
+    disableButtons = true;
+    scoreText.setText(getString(R.string.score) + (pattern.size()-1));
+    root.setBackgroundColor(getResources().getColor(android.R.color.black));
+
     for (int i = 0; i <= pattern.size(); i++) {
       if (i == 0) {
         int buttonId = pattern.get(i);
